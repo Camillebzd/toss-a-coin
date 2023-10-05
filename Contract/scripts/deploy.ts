@@ -8,7 +8,8 @@ async function main() {
   console.log(`TossACoin address: ${await tossACoin.getAddress()}`);
   console.log(`Transaction hash: ${tossACoin.deploymentTransaction()?.hash}`);
 
-  if (network.config.chainId !== 31337 && process.env.ETHERSCAN_API_KEY) {
+  if (network.config.chainId !== 31337 && network.config.chainId != undefined && process.env.ETHERSCAN_API_KEY) {
+    console.log(network.config.chainId);
     console.log("Waiting for blocks confirmations...");
     await tossACoin.deploymentTransaction()?.wait(6);
     console.log("Confirmed!");
