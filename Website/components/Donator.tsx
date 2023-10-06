@@ -3,6 +3,7 @@ import styles from '@/app/page.module.css';
 import { ethers } from 'ethers';
 import { createContract, roundBigIntString } from '@/utils/scripts';
 import { useEffect, useState } from "react";
+import { Notify } from 'notiflix';
 
 const Donator = ({address}: {address: string}) => {
   const [personnalBalance, setPersonnalBalance] = useState("0.000");
@@ -23,10 +24,13 @@ const Donator = ({address}: {address: string}) => {
     if (tossACoin) {
       try {
         const bigIntAmount = ethers.parseEther(amount);
-        if (bigIntAmount > 0)
+        if (bigIntAmount > 0) {
           await tossACoin.toss({value: bigIntAmount});
+          Notify.success("Founded! Wait 10 sec and reload the page.");
+        }
       } catch (e) {
         console.log(e);
+        Notify.failure("Error: failed to found.");
       }
     }
   }

@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import contractABI from '@/abi/TossACoin.json';
+import { Notify } from 'notiflix';
 
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_TOSS_A_COIN_ADDRESS || "";
 
@@ -15,6 +16,7 @@ export async function createContract(walletAddress: string) {
     return contract;
   } catch (e) {
     console.log(e);
+    Notify.failure("An error occured");
     return undefined;
   }
 }
