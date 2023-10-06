@@ -18,7 +18,7 @@ const ConnectButton = ({address, setAddress, isOnGoodNetwork, setIsOnGoodNetwork
 {address: string, setAddress: Dispatch<SetStateAction<string>>, isOnGoodNetwork: boolean, 
 setIsOnGoodNetwork: Dispatch<SetStateAction<boolean>>}) => {
   useEffect(() => {
-    if (typeof window.ethereum === undefined) {
+    if (window?.ethereum === undefined) {
       console.log("Error: not metamask detected");
       Notify.failure("Install metamask if you want to use the site")
       return;
